@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { Globe, Particle } from "../../store";
 import { useGlobalStore } from "../../store";
 
 /**
@@ -18,11 +19,34 @@ export function useGlobeController() {
 		if (_count === countTarget) {
 			const id = Math.random().toString(36).substring(2, 15); // random id for globe
 			setId(id);
-			addGlobe({ particles: [], id, x: 0, y: 0 });
+			addGlobe(generateGlobe(id));
 			setUpGlobeSyncChannel(id);
 		}
 		setCount(_count + 1);
 	}, []);
+}
+
+const N_PARTICLES = 10_000;
+function generateGlobe(id: string): Globe {
+	const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+	const particles: Particle[] = [];
+	for (let i = 0; i < N_PARTICLES; i++) particles.push(generateParticle());
+
+	return {
+		id,
+		color,
+		x: screenLeft + innerWidth / 2,
+		y: screenTop + innerHeight / 2,
+		particles,
+	};
+}
+
+function generateParticle(): Particle {
+	const x = Math.random() * screen.width;
+	const y = Math.random() * screen.height;
+	const vx = Math.random() * 2 - 1;
+	const vy = Math.random() * 2 - 1;
+	return { x, y, vx, vy };
 }
 
 interface SyncGlobeData {
@@ -43,16 +67,40 @@ function setUpGlobeSyncChannel(id: string) {
 
 function activateController(channel: BroadcastChannel, id: string) {
 	const { setActiveControllerId, setGlobeIds } = useGlobalStore.getState();
+	setActiveControllerId(id);
+	void animateParticles(id);
 	setTimeout(() => {
-		setActiveControllerId(id);
 		setGlobeIds([]);
 		channel.postMessage({ action: "init-sync", payload: { target: id } });
-
 		setTimeout(() => {
 			const { _globeIds, globes, updateGlobes } = useGlobalStore.getState();
 			updateGlobes(globes.filter(globe => _globeIds.includes(globe.id) || globe.id === id));
 		}, 700);
 	}, 300);
+	return true;
+}
+
+async function animateParticles(id: string) {
+	const { activeControllerId, globes, updateGlobes } = useGlobalStore.getState();
+	if (activeControllerId !== id) return false;
+	globes.forEach(globe => {
+		if (globe.id === id) {
+			globe.particles.forEach(particle => {
+				particle.x += particle.vx;
+				particle.y += particle.vy;
+				if (particle.x < 0 || particle.x > screen.width) particle.vx *= -1;
+				if (particle.y < 0 || particle.y > screen.height) particle.vy *= -1;
+			});
+		}
+	});
+	updateGlobes([...globes]);
+	await new Promise(resolve => {
+		setTimeout(resolve, 33);
+	}); // 30 fps
+
+	requestAnimationFrame(() => {
+		void animateParticles(id);
+	});
 	return true;
 }
 

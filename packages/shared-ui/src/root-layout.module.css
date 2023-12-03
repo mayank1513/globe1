@@ -132,6 +132,11 @@
 	gap: 20px;
 }
 
+.skylight {
+	width: 75vw;
+	height: 75vh;
+}
+
 /* Mobile and Tablet */
 @media (max-width: 800px) {
 	.center {

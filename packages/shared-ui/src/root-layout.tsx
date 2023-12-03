@@ -19,7 +19,7 @@ export function SharedRootLayout({ children, className = "", ...props }: SharedR
 			<main className={`${styles.main} ${className}`} {...props}>
 				<Description />
 				<GlobeController />
-				<Skylight />
+				<Skylight className={styles.skylight} />
 				{children}
 				<Hero />
 				<Cards />

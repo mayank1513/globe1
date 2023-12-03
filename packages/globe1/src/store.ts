@@ -1,19 +1,19 @@
 import { create } from "zustand";
 import { syncTabs } from "zustand-sync-tabs";
 
-interface Particle {
+export interface Particle {
 	x: number;
 	y: number;
 	vx: number;
 	vy: number;
-	color: string;
 }
 
-interface Globe {
+export interface Globe {
 	id: string;
-	particles: Particle[];
+	color: string;
 	x: number;
 	y: number;
+	particles: Particle[];
 }
 
 export interface GlobalStore {
