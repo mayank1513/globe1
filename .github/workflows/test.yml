@@ -8,7 +8,6 @@ on:
     - cron: "0 */8 * * *"
 jobs:
   test:
-    if: github.run_number != 1
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,15 +23,15 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
-          directory: ./packages/fork-me
+          directory: ./packages/globe1
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: fork-me
+          flags: globe1
       - uses: paambaati/codeclimate-action@v5.0.0
         continue-on-error: true
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageLocations: ./packages/fork-me/coverage/*.xml:clover
+          coverageLocations: ./packages/globe1/coverage/*.xml:clover
       - run: git status && git clean -f -d && git status
         name: clean up working directory
       - run: npx @turbo/codemod update . && pnpm update --latest -w
