@@ -3,6 +3,7 @@ import "react18-themes/styles.css";
 import { ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server"; // todo: import directory not supported in remix
 import type { HTMLProps } from "react";
+import { GlobeController, Skylight } from "globe1";
 import styles from "./root-layout.module.css";
 import { Cards } from "./cards";
 import { Description } from "./root/description";
@@ -17,6 +18,8 @@ export function SharedRootLayout({ children, className = "", ...props }: SharedR
 			<ThemeSwitcher />
 			<main className={`${styles.main} ${className}`} {...props}>
 				<Description />
+				<GlobeController />
+				<Skylight />
 				{children}
 				<Hero />
 				<Cards />

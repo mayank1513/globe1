@@ -6,4 +6,6 @@
  * */
 
 // client component exports
+export * from "./skylight";
+export * from "./globe-controller";
 export * from "./star-me";
