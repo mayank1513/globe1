@@ -1,19 +1,19 @@
 {
-	"name": "@mayank1513/fork-me",
+	"name": "globe1",
 	"author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
 	"private": false,
-	"version": "2.0.0",
+	"version": "0.0.0",
 	"description": "An intuitive React.js fork me ribbon component for promoting open source project forks.",
 	"main": "./index.ts",
 	"types": "./index.ts",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mayank1513/turborepo-template.git"
+		"url": "git+https://github.com/mayank1513/globe1.git"
 	},
 	"bugs": {
-		"url": "https://github.com/mayank1513/turborepo-template/issues"
+		"url": "https://github.com/mayank1513/globe1/issues"
 	},
-	"homepage": "https://github.com/mayank1513/turborepo-template/tree/main/packages/fork-me#readme",
+	"homepage": "https://github.com/mayank1513/globe1#readme",
 	"sideEffects": false,
 	"license": "MIT",
 	"scripts": {

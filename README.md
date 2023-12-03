@@ -1,17 +1,34 @@
-# Turborepo template
+# globe1
 
-[![test](https://github.com/react18-tools/turborepo-template/actions/workflows/test.yml/badge.svg)](https://github.com/react18-tools/turborepo-template/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/5585ecdd3ca2511eb9aa/maintainability)](https://codeclimate.com/github/mayank1513/turborepo-template/maintainability) [![codecov](https://codecov.io/gh/mayank1513/turborepo-template/graph/badge.svg)](https://codecov.io/gh/mayank1513/turborepo-template) [![Version](https://img.shields.io/npm/v/@mayank1513/fork-me.svg?colorB=green)](https://www.npmjs.com/package/@mayank1513/fork-me) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/@mayank1513/fork-me.svg)](https://www.npmjs.com/package/@mayank1513/fork-me) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@mayank1513/fork-me) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+[![test](https://github.com/mayank1513/globe1/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/globe1/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/5585ecdd3ca2511eb9aa/maintainability)](https://codeclimate.com/github/mayank1513/globe1/maintainability) [![codecov](https://codecov.io/gh/mayank1513/globe1/graph/badge.svg)](https://codecov.io/gh/mayank1513/globe1) [![Version](https://img.shields.io/npm/v/globe1.svg?colorB=green)](https://www.npmjs.com/package/globe1) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/globe1.svg)](https://www.npmjs.com/package/globe1) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/globe1) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
-✅ Fully Treeshakable (`import from @mayank1513/fork-me/client/component`)\
+✅ Fully Treeshakable (`import from globe1/client/component`)\
 ✅ Full TypeScript Support\
 ✅ Unleash the full power of React18 Server components\
 ✅ Works with all build systems/tools/frameworks for React18\
 ✅ Powerful code generators - try `yarn turbo gen`\
 ✅ Doccumented with [Typedoc](https://react18-tools.github.io/turborepo-template) ([Docs](https://react18-tools.github.io/turborepo-template))
 
-This is a template created based on official starter Turborepo.
+## Install
 
-Simply click on `Use this template` button to use and customize this template for your next JavaSctipt / TypeScript / React / Vue / Next.js library or project.
+```bash
+$ pnpm add globe1
+```
+
+or
+
+```bash
+$ npm install globe1
+```
+
+or
+
+```bash
+$ yarn add globe1
+```
+
+
+
 
 ## What's different from scaffolding turbo-repo by `create-turbo`
 
@@ -30,7 +47,7 @@ Following features make it really cool and useful
 
 ## Checklist
 
-- [ ] Clone this repo
+
 - [ ] Set up `CodeCov`
   - [ ] Visit codecov and setup your repo
   - [ ] Create repository secrets for `CODECOV_TOKEN`
@@ -42,12 +59,12 @@ Following features make it really cool and useful
 - [ ] Add `NPM_AUTH_TOKEN` to repository secrets to automate publishing package
   - [ ] login to your `npm` account and create automation token
   - [ ] Create a new repository secrets `NPM_AUTH_TOKEN`
-- [ ] Update description in `packages/@mayank1513/fork-me/package.json`
+- [ ] Update description in `packages/globe1/package.json`
 - [ ] Update Repo Stats by visiting and setting up [repobeats](https://repobeats.axiom.co/)
 - [ ] Create your library and update examples
 - [ ] Update README
 - [ ] Setup GitHub pages to deploy docs
-  - [ ] Go to [repo settings](https://github.com/react18-tools/turborepo-template/settings/pages) -> pages (On left panel); Select deploy from a branch; Then Select `main` and `/docs`
+  - [ ] Go to [repo settings](https://github.com/mayank1513/globe1/settings/pages) -> pages (On left panel); Select deploy from a branch; Then Select `main` and `/docs`
 - [ ] Push your changes/Create PR and see your library being automatically tested and published
 - [ ] Optionally deploy your example(s) to Vercel.
 - [ ] You are most welcome to star this template, contribute, and/or sponsor the `terbo-repo-template` project or my other open-source work
@@ -79,7 +96,7 @@ Each package/example is 100% [TypeScript](https://www.typescriptlang.org/).
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
+cd globe1
 pnpm build
 ```
 
@@ -88,7 +105,7 @@ pnpm build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
+cd globe1
 pnpm dev
 ```
 
@@ -103,7 +120,7 @@ Learn more about the power of Turborepo:
 - [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
 - [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
 
-### 🤩 Don't forger to start [this repo](https://github.com/mayank1513/turborepo-template)!
+### 🤩 Don't forger to start [this repo](https://github.com/mayank1513/globe1)!
 
 Want handson course for getting started with Turborepo? Check out [React and Next.js with TypeScript](https://mayank-chaudhari.vercel.app/courses/react-and-next-js-with-typescript) and [The Game of Chess with Next.js, React and TypeScrypt](https://www.udemy.com/course/game-of-chess-with-nextjs-react-and-typescrypt/?referralCode=851A28F10B254A8523FE)
 
