@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useGlobalStore } from "../../store";
+import { DISPLAY_FACTOR } from "../globe-controller";
 
 // interface SkylightProps {
 // 	children?: React.ReactNode;
@@ -10,7 +11,12 @@ import { useGlobalStore } from "../../store";
  *
  */
 export function Skylight(props: React.HTMLProps<HTMLDivElement>) {
-	const [globeIds, globes, id] = useGlobalStore(st => [st._globeIds, st.globes, st._id]);
+	const [globeIds, globes, id, _particleRadius] = useGlobalStore(st => [
+		st._globeIds,
+		st.globes,
+		st._id,
+		st._particleRadius,
+	]);
 	const containerRef = React.useRef<HTMLDivElement>(null);
 	const canvasRef = React.useRef<HTMLCanvasElement>(null);
 	const contextRef = React.useRef<CanvasRenderingContext2D | null>();
@@ -53,52 +59,50 @@ export function Skylight(props: React.HTMLProps<HTMLDivElement>) {
 			);
 
 			const globeCtx = globeCanvas.getContext("2d", { alpha: false });
-			if (!globeCtx) return;
-			const offsetX = screenLeft + (canvasRef.current?.getBoundingClientRect().left || 0);
-			const offsetY = screenTop + (canvasRef.current?.getBoundingClientRect().top || 0);
+			if (!globeCtx || !canvasRef.current) return;
+			const rect = canvasRef.current.getBoundingClientRect();
+			const offsetX = Math.floor(screenLeft + rect.left) - _particleRadius;
+			const offsetY = Math.floor(screenTop + rect.top) - _particleRadius;
 			globes.forEach(globe => {
-				if (!globeIds.includes(globe.id) && globe.id !== id) return;
+				// if (!globeIds.includes(globe.id) && globe.id !== id) return;
 				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- misleading error
 				if (!offScreenCanvasRef.current[globe.id]) {
-					const canvas1 = new OffscreenCanvas(2, 2);
+					const canvas1 = new OffscreenCanvas(2 * _particleRadius, 2 * _particleRadius);
 					const ctx = canvas1.getContext("2d", { alpha: false });
 					if (!ctx) return;
 					ctx.fillStyle = globe.color;
 					ctx.beginPath();
-					ctx.arc(1, 1, 1, 0, 2 * Math.PI);
+					ctx.arc(_particleRadius, _particleRadius, _particleRadius, 0, 2 * Math.PI);
 					ctx.closePath();
 					ctx.fill();
 					offScreenCanvasRef.current[globe.id] = canvas1;
 				}
 				const pointCanvas = offScreenCanvasRef.current[globe.id];
 
-				globeCtx.drawImage(pointCanvas, globe.x - 2 - offsetX, globe.y - 2 - offsetY, 5, 5);
-				globe.particles.forEach(particle => {
-					globeCtx.drawImage(pointCanvas, particle.x - offsetX, particle.y - offsetY, 1, 1);
-				});
+				globeCtx.drawImage(
+					pointCanvas,
+					globe.x - 2 - offsetX,
+					globe.y - 2 - offsetY,
+					5 * _particleRadius,
+					5 * _particleRadius,
+				);
+				for (let i = 0; i < globe.particles.length; i += DISPLAY_FACTOR) {
+					const particle = globe.particles[i];
+					globeCtx.drawImage(
+						pointCanvas,
+						particle.x - offsetX,
+						particle.y - offsetY,
+						2 * _particleRadius,
+						2 * _particleRadius,
+					);
+				}
 			});
 			context.drawImage(globeCanvas, 0, 0);
 		}
-	}, [globeIds, globes, id]);
+	}, [_particleRadius, globeIds, globes, id]);
 	return (
 		<div {...props} ref={containerRef}>
 			<canvas ref={canvasRef} style={{ height: "100%", width: "100%" }} />
 		</div>
 	);
 }
-
-// function renderScene(canvas: HTMLCanvasElement | null) {
-// 	const context = canvas?.getContext("2d");
-// 	if (!context) return false;
-// 	const { globes, _globeIds, _id } = useGlobalStore.getState();
-// 	context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-// 	globes.forEach(globe => {
-// 		if (!_globeIds.includes(globe.id) && globe.id !== _id) return;
-// 		context.fillStyle = globe.color;
-// 		context.fillRect(globe.x - 2 - screenLeft, globe.y - 2 - screenTop, 5, 5);
-// 		globe.particles.forEach(particle => {
-// 			context.fillRect(particle.x - screenLeft, particle.y - screenTop, 1, 1);
-// 		});
-// 	});
-// 	requestAnimationFrame(() => renderScene(canvas));
-// }

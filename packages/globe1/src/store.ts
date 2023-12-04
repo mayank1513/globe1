@@ -20,6 +20,7 @@ export interface GlobalStore {
 	_id: string;
 	_count: number;
 	_globeIds: string[];
+	_particleRadius: number;
 	globes: Globe[];
 	activeControllerId: string;
 	setId: (id: string) => void;
@@ -29,6 +30,7 @@ export interface GlobalStore {
 	setCount: (count: number) => void;
 	setGlobeIds: (_globeIds: string[]) => void;
 	setActiveControllerId: (id: string) => void;
+	setParticleRadius: (radius: number) => void;
 }
 
 export const useGlobalStore = create<GlobalStore>()(
@@ -39,6 +41,7 @@ export const useGlobalStore = create<GlobalStore>()(
 			globes: [],
 			activeControllerId: "",
 			_globeIds: [],
+			_particleRadius: 2,
 			setId: id => {
 				set({ ...get(), _id: id });
 			},
@@ -65,6 +68,9 @@ export const useGlobalStore = create<GlobalStore>()(
 					globes: prevState.globes.filter(globe => globe.id !== id),
 					_globeIds: prevState._globeIds.filter(globeId => globeId !== id),
 				});
+			},
+			setParticleRadius(radius) {
+				return { ...get(), _particleRadius: radius };
 			},
 		}),
 		{ name: "globe", regExpToIgnore: /^_/ },
