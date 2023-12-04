@@ -18,7 +18,7 @@ export function SharedRootLayout({ children, className = "", ...props }: SharedR
 			<ThemeSwitcher />
 			<main className={`${styles.main} ${className}`} {...props}>
 				<Description />
-				<GlobeController />
+				<GlobeController nParticles={300} particleRadius={1} />
 				<Skylight className={styles.skylight} />
 				{children}
 				<Hero />
